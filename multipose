@@ -1,0 +1,19 @@
+!pip install -q tensorflow tensorflow-hub matplotlib
+!pip install -q opencv-python
+!pip install imageio[pyav]
+
+import tensorflow as tf
+import tensorflow_hub as hub
+import cv2
+from matplotlib import pyplot as plt
+import numpy as np
+
+# Optional if you are using a GPU
+gpus = tf.config.experimental.list_physical_devices('GPU')
+for gpu in gpus:
+    tf.config.experimental.set_memory_growth(gpu, True)
+
+model = hub.load('https://tfhub.dev/google/movenet/multipose/lightning/1')
+movenet = model.signatures['serving_default']
+
+! wget -q -O move.gif 
